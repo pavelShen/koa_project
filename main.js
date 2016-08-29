@@ -1,5 +1,4 @@
 'use strict';
-console.log('start');
 
 let koa = require('koa');
 let Router = require('koa-router');
@@ -20,24 +19,28 @@ myRouter.get('user','/users/:id', function *(next) {
   });
 });
 
-// myRouter.get('detail','/detail/:id', function *(next) {
-//   yield this.render('detail',{
-//     text:'详细'
-//   })
-// });
+let restData = {};
+
+request.get('https://m.ele.me/restapi/shopping/restaurants')
+  .query({
+    latitude:31.20745,
+    longitude:121.59842,
+    offset:40,
+    limit:1
+  })
+  .end(function(err, res){
+      if(err){
+        console.log(err)
+      }
+      else{
+        restData = res;
+      }
+  });
 
 myRouter.get('detail','/detail/:id',function *(next){
-  request.get('https://m.ele.me/restapi/shopping/restaurants?latitude=31.20745&longitude=121.59842&offset=40&limit=1&extras[]=activities')
-        .end(function(err, res){
-            if(err){
-              console.log(err)
-            }
-            else{
-              console.log(res.text);
-            }
-        });
+  console.log('inpage');
    yield this.render('detail',{
-    text:'aa'
+    text:JSON.parse(restData.text)[0].address
    });
 })
 
