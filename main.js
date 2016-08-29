@@ -5,10 +5,19 @@ let Router = require('koa-router');
 let render = require('koa-ejs');
 let path = require('path');
 
+var log4js = require('log4js');
+log4js.configure({
+  appenders: [
+    { type: 'console' },
+    { type: 'file', filename: 'log/app.log', category: 'siteName' }
+  ]
+});
+var logger = log4js.getLogger("siteName");
+
 let app = koa();
 let myRouter = new Router();
 
-let request = require('superagent');
+let restaurantData = require('./controller/restaurant.js');
 
 myRouter.get('user','/users/:id', function *(next) {
   yield this.render('user',{
@@ -19,28 +28,9 @@ myRouter.get('user','/users/:id', function *(next) {
   });
 });
 
-let restData = {};
-
-request.get('https://m.ele.me/restapi/shopping/restaurants')
-  .query({
-    latitude:31.20745,
-    longitude:121.59842,
-    offset:40,
-    limit:1
-  })
-  .end(function(err, res){
-      if(err){
-        console.log(err)
-      }
-      else{
-        restData = res;
-      }
-  });
-
 myRouter.get('detail','/detail/:id',function *(next){
-  console.log('inpage');
    yield this.render('detail',{
-    text:JSON.parse(restData.text)[0].address
+    text:'abc'
    });
 })
 
@@ -48,9 +38,7 @@ myRouter.get('notFound','/404', function *(next) {
   yield this.render('404');
 });
 
-myRouter.get('root','/', function *(next) {
-  yield this.render('index');
-});
+myRouter.get('root','/', restaurantData);
 
 render(app, {
   root: path.join(__dirname, 'view'),
@@ -63,7 +51,7 @@ render(app, {
 app.use(myRouter.routes());
 
 app.on('error', function(err, ctx){
-  log.error('server error', err, ctx);
+  logger.error('server error', err, ctx);
 });
 
 app.listen(3000);
