@@ -4,15 +4,7 @@ let koa = require('koa');
 let Router = require('koa-router');
 let render = require('koa-ejs');
 let path = require('path');
-
-var log4js = require('log4js');
-log4js.configure({
-  appenders: [
-    { type: 'console' },
-    { type: 'file', filename: 'log/app.log', category: 'siteName' }
-  ]
-});
-var logger = log4js.getLogger("siteName");
+let logger = require('./log.js');
 
 let app = koa();
 let myRouter = new Router();
@@ -35,7 +27,9 @@ myRouter.get('detail','/detail/:id',function *(next){
 })
 
 myRouter.get('notFound','/404', function *(next) {
-  yield this.render('404');
+  yield this.render('404',{
+    text:'a'
+  });
 });
 
 myRouter.get('root','/', restaurantData);
