@@ -1,0 +1,32 @@
+{
+  "name": "koa_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "koa": "^1.2.1",
+    "koa-ejs": "^3.0.0",
+    "superagent": "^2.2.0",
+    "koa-router": "^5.4.0",
+    "log4js": "^0.6.38",
+    "superagent-no-cache": "^0.1.0",
+    "devtool": "^2.2.0"
+  },
+  "devDependencies": {
+    "should": "^11.1.0",
+    "supertest": "^2.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pavelShen/koa_project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pavelShen/koa_project/issues"
+  },
+  "homepage": "https://github.com/pavelShen/koa_project#readme"
+}
