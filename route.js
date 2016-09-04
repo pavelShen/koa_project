@@ -1,3 +1,5 @@
+'use strict';
+
 let koa = require('koa');
 let Router = require('koa-router');
 
