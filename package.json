@@ -4,13 +4,14 @@
   "description": "",
   "main": "main.js",
   "dependencies": {
+    "devtool": "^2.2.0",
     "koa": "^1.2.1",
     "koa-ejs": "^3.0.0",
-    "superagent": "^2.2.0",
+    "koa-log4": "^1.0.1",
     "koa-router": "^5.4.0",
     "log4js": "^0.6.38",
-    "superagent-no-cache": "^0.1.0",
-    "devtool": "^2.2.0"
+    "superagent": "^2.2.0",
+    "superagent-no-cache": "^0.1.0"
   },
   "devDependencies": {
     "mocha": "^3.0.2",
